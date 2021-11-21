@@ -66,7 +66,7 @@
 
         <div class="form-style-10">
             <h1>Cadastre-se <span>Cadastre-se e aproveite para conhecer nossos serviços!</span></h1>
-            <form action="gerenciarUsuario" method="POST">
+            <form action="gerenciarUsuario" method="POST" id="form">
                 <div class="section"><span>1</span>Nome:</div>
                 <div class="inner-wrap">
                     <label>Seu Nome: <input type="text" name="nome" required/></label>
@@ -104,7 +104,28 @@
                    
                 </div>
                 <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
-            </form>
+            </form><br><br>
+            <div class="g-recaptcha" data-sitekey="6LekakodAAAAAHrSl3RCgmTX-0J8Xjf8bx2Il6kZ"></div>
+            <br><br> <div id="error"></div>
+                         
+							<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+							
+							<script>
+								window.onload= function(){
+									let isValid= false;
+									const form= document.getElementById("form");
+									const error= document.getElementById("error");
+									
+									form.addEventListener("submit",function(event){
+										event.preventDefault();
+										const response = grecaptcha.getResponse();
+										console.log(response);
+										if(response){
+											form.submit();
+										}
+									});
+								}
+							</script>
         </div>     
 
 

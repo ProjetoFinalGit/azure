@@ -79,18 +79,7 @@
                                 </div>
                             </form>
                            <br><br> <div id="error"></div>
-                           <script>
-								window.onload= function(){
-									let isValid= false;
-									const form= document.getElementById("form");
-									const error= document.getElementById("error");
-									
-									form.addEventListener("submit",function(event){
-										event.preventDefault();
-										const response = grecaptcha.getResponse();
-									});
-								}
-							</script>
+                         
 							<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 							
 							<script>
