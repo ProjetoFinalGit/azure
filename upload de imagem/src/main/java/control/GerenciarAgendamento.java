@@ -143,7 +143,7 @@ public class GerenciarAgendamento extends HttpServlet {
                
               
                 
-                if(!adao.verificarAtendimento(idAtendente, time, dataAgendamento)) {
+                if(adao.verificarAtendimento(idAtendente, time, dataAgendamento)) {
                 	mensagem="O agendamento não pode ser feito pois o atendente está ocupado neste horario!!";
                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='agendamento.jsp';</script>");

@@ -288,7 +288,7 @@ public class AgendamentoDAO {
     public boolean verificarAtendimento(int idAtendente, Time time, Date date) throws SQLException {
     	Connection conexao = ConexaoFactory.conectar();
     	String sql = "SELECT ags.idAtendente,ags.status,ags.horario,ags.idAgendamento,ag.idAgendamento,ag.dataAgendamento FROM agendamento_servico ags "
-    			+ "INNER JOIN agendamento ag ON ags.idAgendamento = ag.idAgendamento WHERE ags.idAtendente = ? AND ags.horario = ? AND ag.dataAgendamento = ? ";
+    			+ "INNER JOIN agendamento ag ON ags.idAgendamento = ag.idAgendamento WHERE ags.idAtendente = ? AND ags.horario = ? AND ag.dataAgendamento = ? AND ags.status=1";
     	
     	PreparedStatement  puxar = conexao.prepareStatement(sql);
         puxar.setInt(1, idAtendente);
@@ -299,7 +299,7 @@ public class AgendamentoDAO {
         
            
            
-           if(lista.next() && lista.getInt("ags.status")==1) {
+           if(lista.next() ) {
         	   conexao.close();
         	   return true;
            }else {

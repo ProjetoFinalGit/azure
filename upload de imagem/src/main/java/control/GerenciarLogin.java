@@ -80,7 +80,7 @@ public class GerenciarLogin extends HttpServlet {
                 
                mensagem="Usuário ou senha incorretas!"; 
                out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='/login.jsp';</script>");
+                   "location.href='login.jsp';</script>");
                
             }
             
