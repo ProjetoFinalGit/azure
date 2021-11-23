@@ -5,7 +5,11 @@
  */
 package model;
 
+import java.io.InputStream;
 import java.sql.Date;
+
+import javax.websocket.Decoder.BinaryStream;
+import java.io.ByteArrayInputStream;
 
 /**
  *
@@ -22,7 +26,7 @@ public class Usuario {
    private String telefone;
    private Date dataNascimento;
    private String cpf;
-   
+   private InputStream foto;
    
    
    
@@ -109,6 +113,14 @@ public class Usuario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+	public InputStream getFoto() {
+		return foto;
+	}
+
+	public void setFoto(InputStream inputStream) {
+		this.foto =  inputStream;
+	}
     
     
     

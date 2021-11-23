@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 
 /**
  *
@@ -133,9 +135,9 @@ public class AgendamentoDAO {
         return agendamentos;
     }
     
-    public boolean deletarAgendamento(int idAgendamento) throws SQLException{
+    public boolean deletarAgendamentoServico(int idAgendamento) throws SQLException{
         Connection conexao = ConexaoFactory.conectar();
-        String sql = "DELETE FROM agendamento WHERE idAgendamento = ?";
+        String sql = "DELETE FROM agendamento_servico WHERE idAgendamento = ?";
         PreparedStatement deletar = conexao.prepareStatement(sql);
         deletar.setInt(1, idAgendamento);
         deletar.execute();
@@ -281,6 +283,55 @@ public class AgendamentoDAO {
             }
          
         return i;
+    }
+    
+    public boolean verificarAtendimento(int idAtendente, Time time, Date date) throws SQLException {
+    	Connection conexao = ConexaoFactory.conectar();
+    	String sql = "SELECT ags.idAtendente,ags.status,ags.horario,ags.idAgendamento,ag.idAgendamento,ag.dataAgendamento FROM agendamento_servico ags "
+    			+ "INNER JOIN agendamento ag ON ags.idAgendamento = ag.idAgendamento WHERE ags.idAtendente = ? AND ags.horario = ? AND ag.dataAgendamento = ? ";
+    	
+    	PreparedStatement  puxar = conexao.prepareStatement(sql);
+        puxar.setInt(1, idAtendente);
+        puxar.setTime(2, time);
+        puxar.setDate(3, date);
+        ResultSet lista = puxar.executeQuery();
+  
+        
+           
+           
+           if(lista.next() && lista.getInt("ags.status")==1) {
+        	   conexao.close();
+        	   return true;
+           }else {
+        	   conexao.close();
+        	   return false;
+           }
+    }
+    
+    public void limparTabela(Date date) throws SQLException {
+    		
+    	
+    		 
+    		 
+    		 Connection conexao = ConexaoFactory.conectar();
+    	    	String sql1 = "select * from agendamento WHERE dataAgendamento < ? and status > 1";
+    	    	PreparedStatement  puxar = conexao.prepareStatement(sql1);
+    	    	puxar.setDate(1, date);
+    	    	ResultSet agendamentos = puxar.executeQuery();
+    	    	
+    	    	while(agendamentos.next()) {
+    	    		String sql2 = "delete from agendamento_servico WHERE idAgendamento = ? ";
+    	    		PreparedStatement  excluirAgendamentoServico = conexao.prepareStatement(sql2);
+    	    		excluirAgendamentoServico.setInt(1, agendamentos.getInt("idAgendamento"));
+    	    		excluirAgendamentoServico.execute();
+    	    		
+    	    		
+    	    		String sql3 = "delete  from agendamento WHERE idAgendamento = ? ";
+    	    		PreparedStatement  excluirAgendamento = conexao.prepareStatement(sql3);
+    	    		excluirAgendamento.setInt(1, agendamentos.getInt("idAgendamento"));
+    	    		excluirAgendamento.execute();
+    	    	}
+    	    	conexao.close();
     }
     
 }

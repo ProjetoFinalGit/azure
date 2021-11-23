@@ -6,7 +6,12 @@
 package control;
 
 import factory.ConexaoFactory;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,10 +25,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
 import model.Perfil;
 import model.PerfilDAO;
 import model.Usuario;
@@ -34,6 +42,7 @@ import model.UsuarioDAO;
  * @author Vitor
  */
 @WebServlet(name = "gerenciarUsuario", urlPatterns = {"/gerenciarUsuario"})
+@MultipartConfig
 public class GerenciarUsuario extends HttpServlet {
 
   
@@ -50,6 +59,8 @@ public class GerenciarUsuario extends HttpServlet {
        UsuarioDAO udao= new UsuarioDAO();
        Usuario user= new Usuario();
        String mensagem="";
+       
+       
        
        Usuario usuario = GerenciarLogin.verificarAcesso(request, response);
        
@@ -184,13 +195,16 @@ public class GerenciarUsuario extends HttpServlet {
               
               
             }if(Integer.parseInt(idUsuario)>0){
+
+            	 Part filePart = request.getPart("file");
+            	InputStream foto=  filePart.getInputStream();
               
                usuario.setIdUsuario(Integer.parseInt(idUsuario));
                usuario.setNome(nome);
                usuario.setLogin(login);
                usuario.setSenha(senha);
                usuario.setStatus(status);
-               
+               usuario.setFoto(foto);
                 usuario.setCpf(cpf);
                usuario.setDataNascimento(java.sql.Date.valueOf(data));
                usuario.setEndereco(endereco);

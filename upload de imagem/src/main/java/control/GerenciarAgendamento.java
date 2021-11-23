@@ -93,7 +93,7 @@ public class GerenciarAgendamento extends HttpServlet {
        String mensagem = "";
        PrintWriter out = response.getWriter();
        
-     
+     Usuario user = GerenciarLogin.verificarAcesso(request, response);
        
        Servico servico = new Servico();
        Usuario usuario = new Usuario();
@@ -127,6 +127,11 @@ public class GerenciarAgendamento extends HttpServlet {
             
             if(idAgendamento.contentEquals("")){
                
+      
+            	
+            	Calendar horaAtual= Calendar.getInstance();
+                
+                
                 agendamento.setStatus(status);
                 agendamento.setUsuario(usuario);
                 agendamento.setValor(servico.getPreco());
@@ -135,8 +140,20 @@ public class GerenciarAgendamento extends HttpServlet {
                 agendamentoServico.setStatus(status);
                 agendamentoServico.setAgendamento(agendamento);
                 agendamentoServico.setHorario(time);
+               
+              
                 
-                if(dataAgendamento.compareTo(verificarData.getTime())>=0){
+                if(!adao.verificarAtendimento(idAtendente, time, dataAgendamento)) {
+                	mensagem="O agendamento não pode ser feito pois o atendente está ocupado neste horario!!";
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='agendamento.jsp';</script>");
+                }
+                else if(dataAgendamento.compareTo(horaAtual.getTime())<0 ) {
+                	mensagem="O agendamento não pode ser feito para dias ou horarios anteriores ao atual!!";
+                    out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                       "location.href='agendamento.jsp';</script>");
+                }
+                else if(dataAgendamento.compareTo(verificarData.getTime())>=0){
                     mensagem="O data de atendimento não pode ser superior a 15 dias!";
                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='agendamento.jsp';</script>");
@@ -145,6 +162,7 @@ public class GerenciarAgendamento extends HttpServlet {
                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='agendamento.jsp';</script>");
                 }else if(adao.qtdeAgendamentos(idUsuario)>=4){
+                	
                     mensagem="Você já tem 4 atendimentos confirmados ou para serem confirmados, cancele um deles para prosseguir!";
                     out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='agendamento.jsp';</script>");
@@ -153,10 +171,13 @@ public class GerenciarAgendamento extends HttpServlet {
 
                     adao.gravarAgendamento(agendamento);
                     agendamento = adao.carregarIDAgendamento(status, dataAgendamento, idUsuario);
+                    
+                    Date dataLimpar = new java.sql.Date(new java.util.Date().getTime());
+                    adao.limparTabela(dataLimpar);
 
                     adao.vincularAgendamentoServico(servico, agendamento, agendamentoServico);
                      mensagem="Agendamento efetuado com sucesso!"; 
-                    if(idUsuario<4){
+                    if(user.getPerfil().getIdPerfil()<4){
                             out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                            "location.href='listarAgendamento.jsp';</script>");
                          }else{

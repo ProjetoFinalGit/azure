@@ -2,6 +2,10 @@
 package model;
 
 import factory.ConexaoFactory;
+
+
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 
@@ -126,8 +130,11 @@ public class UsuarioDAO {
             
         }if(usuario.getIdUsuario()>0){
             String sql="UPDATE usuario SET nome = ?, senha = ?, " +
-                     "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ? WHERE idUsuario = ?";
+                     "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ?,imagem=? WHERE idUsuario = ?";
             PreparedStatement ps=conexao.prepareStatement(sql);
+            Blob imagem= null;
+           
+    
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getSenha());   
             ps.setInt(3, usuario.getStatus());
@@ -136,7 +143,8 @@ public class UsuarioDAO {
             ps.setString(6, usuario.getEndereco());
             ps.setString(7, usuario.getTelefone());
             ps.setDate(8, usuario.getDataNascimento());
-            ps.setInt(9, usuario.getIdUsuario());
+            ps.setBinaryStream(9, usuario.getFoto());
+            ps.setInt(10, usuario.getIdUsuario());
             
             
             ps.execute();
@@ -189,7 +197,7 @@ public class UsuarioDAO {
     public Usuario getCarregarUsuario(String login,String senha) throws SQLException{
        Usuario usuario = new Usuario();
  
-        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.login=? AND u.senha=?";
+        String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil,u.imagem FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.login=? AND u.senha=?";
        
        Connection conexao= ConexaoFactory.conectar();
        PreparedStatement ps= conexao.prepareStatement(sql);
@@ -207,7 +215,7 @@ public class UsuarioDAO {
             usuario.setDataNascimento(rs.getDate("u.dataNascimento"));
             usuario.setEndereco(rs.getString("u.endereco"));
             usuario.setTelefone(rs.getString("u.telefone"));
-            
+            usuario.setFoto(rs.getBinaryStream("u.imagem"));
             usuario.setPerfil(pdao.getCarregarPorId(rs.getInt("p.idPerfil")));
        }
        conexao.close();

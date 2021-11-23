@@ -69,7 +69,7 @@
 
         <div class="form-style-10">
             <h1>Alterar Cadastro <span>Altere seus dados!</span></h1>
-            <form action="gerenciarUsuario" method="POST">
+            <form action="gerenciarUsuario" method="POST" enctype="multipart/form-data">
                 <div class="section"><span>1</span>Nome e ID:</div>
                 <div class="inner-wrap">
                     <label>ID Cadastro: <input type="text" name="idUsuario" readonly value="${user.idUsuario}"/></label>
@@ -94,10 +94,17 @@
                     <label>Data de Nascimento: <input type="date" name="dataNascimento"  required value="${user.dataNascimento}" /></label>
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required value="${user.endereco}"/></label>
                 </div>
+                
+                <div class="section"><span>4</span>Foto:</div>
+                <div class="inner-wrap">
+                    <label>Foto de Exibição: <input type="file" name="file"  /></label>
+                   
+                </div>
+                
                 <div class="button-section">
                      <c:if test="${usuario.perfil.idPerfil!=1}"><input type="hidden" name="idPerfil" value="${user.perfil.idPerfil}"/></c:if>
                     <c:if test="${usuario.perfil.idPerfil==1}">
-                       <div class="section"><span>4</span>Acesso:</div> 
+                       <div class="section"><span>5</span>Acesso:</div> 
                         <div class="inner-wrap">
                      <jsp:useBean class="model.PerfilDAO" id="pdao"/>          
                                   <select name="idPerfil" required >
@@ -111,6 +118,7 @@
                                   </select>
                     </div></c:if>
                 </div>
+                
                 <div class="button-section">
                       <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
                 </div>    
