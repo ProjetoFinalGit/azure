@@ -28,17 +28,27 @@
               maximum-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css" type="text/css" media="all"/>
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+
         <link rel="stylesheet" href="datatables/dataTables.bootstrap4.css"/>
-        <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+
         
         <script src="https://kit.fontawesome.com/3f3417947e.js" crossorigin="anonymous"></script>
 
-      
-        
+    
+      	<script language="JavaScript" type="text/javascript">
+        if (screen.width >= "1024") {
+         screen.width=1550;
+        }
+        if (screen.width == "800") {
+          window.resizeTo(800, 600);
+        }
+        if (screen.width <= "800") {
+          window.resizeTo(640, 420);
+        }
+      </script>
+   
     </head>
-    <body>
+    <body style="width:100%;min-width:1300px;max-width:2000px">
         <%   
          Usuario usuario = new Usuario();
     usuario = GerenciarLogin.verificarAcesso(request, response);
@@ -68,6 +78,7 @@
             </div><!-- fim da div menu -->
             <div id="content" style="padding-top: 10px">
                 <div class="h-100 justify-content-center align-items-center">
+                <h2>&nbspMeus Agendamentos</h2>
                     <div clas="col-12">
                        <div class="col-sm-2 col-12" style="padding-bottom: 10px">
                         <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="agendamento.jsp" 
@@ -76,7 +87,7 @@
                       
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover table-striped 
-                                   table-bordered" id="listarServico">
+                                   table-bordered" id="listarAgendamento">
                                 <thead  style="background-color:#9D6E58;">
                                     <tr class="text-white">
                                         <th>Agendamento</th>
@@ -179,12 +190,12 @@
                                 </tbody>
                             </table>
                             
-                              <script src="js/jquery-3.6.0.js"></script>
+                            <script src="js/jquery-3.6.0.js"></script>
                             <script src="datatables/jquery.dataTables.js"></script>
                             <script src="datatables/dataTables.bootstrap4.js"></script>
                             <script>
                                 $(document).ready(function () {
-                                    $("#listarServico").dataTable({
+                                    $("#listarAgendamentos").dataTable({
                                         "bJQueryUI": true,
                                         "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "All"]],
                                         "oLanguage": {

@@ -27,7 +27,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicons -->
  
@@ -112,10 +112,10 @@
                 <c:if test="${usuario!=null}">
                     <div class="dropdown text-end">
                         <a href="#" class="d-block menuBanner text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
-                           <p style="font-family: 'Open Sans'; margin:auto;display: inline">Olá, ${usuario.nome}</p>
+                           <img <c:if test="${usuario.imagem==null}">src="https://github.com/mdo.png"</c:if> <c:if test="${usuario.imagem!=null}">src="data:image/png;base64, ${usuario.imagem}"</c:if>alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small show" aria-labelledby="dropdownUser1" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start">
-                           
+                            <li><a class="dropdown-item" >Olá, ${usuario.nome}</a></li>
                             <li><a class="dropdown-item" href="gerenciarUsuario?acao=alterar&idUsuario=${usuario.idUsuario}"><i class="fas fa-user-alt">&nbsp</i>Meus Dados</a></li>
                              <c:forEach var="menu" items="${usuario.perfil.menus}">
 		                        <c:if test="${menu.exibir==1}">

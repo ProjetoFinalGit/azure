@@ -7,9 +7,14 @@ package model;
 
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.Base64;
 
 import javax.websocket.Decoder.BinaryStream;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
  *
@@ -27,7 +32,7 @@ public class Usuario {
    private Date dataNascimento;
    private String cpf;
    private InputStream foto;
-   
+   private String imagem;
    
    
     public Usuario(){
@@ -121,6 +126,22 @@ public class Usuario {
 	public void setFoto(InputStream inputStream) {
 		this.foto =  inputStream;
 	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(InputStream foto) throws IOException {
+		
+		if(foto!=null) {
+			byte[] bytes = foto.readAllBytes();
+			String imagem = Base64.getEncoder().encodeToString(bytes);
+			this.imagem = imagem;
+		}
+		
+	}
+	
+	
     
     
     

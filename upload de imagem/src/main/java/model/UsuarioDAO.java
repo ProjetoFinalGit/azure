@@ -3,7 +3,7 @@ package model;
 
 import factory.ConexaoFactory;
 
-
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -194,7 +194,7 @@ public class UsuarioDAO {
         return usuario;
     }
     
-    public Usuario getCarregarUsuario(String login,String senha) throws SQLException{
+    public Usuario getCarregarUsuario(String login,String senha) throws SQLException, IOException{
        Usuario usuario = new Usuario();
  
         String sql="SELECT p.idPerfil,p.nome,u.idUsuario,u.nome,u.login,u.senha,u.status,u.cpf,u.endereco,u.telefone,u.dataNascimento,u.idPerfil,u.imagem FROM perfil p INNER JOIN usuario u ON p.idPerfil=u.idPerfil WHERE u.login=? AND u.senha=?";
@@ -217,6 +217,10 @@ public class UsuarioDAO {
             usuario.setTelefone(rs.getString("u.telefone"));
             usuario.setFoto(rs.getBinaryStream("u.imagem"));
             usuario.setPerfil(pdao.getCarregarPorId(rs.getInt("p.idPerfil")));
+            if(rs.getBinaryStream("u.imagem")!=null) {
+            	usuario.setImagem(rs.getBinaryStream("u.imagem"));
+            }
+            
        }
        conexao.close();
        return usuario;

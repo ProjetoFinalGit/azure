@@ -11,6 +11,7 @@ public class ConexaoFactory {
     private static final String USUARIO = "adminprojeto@leolimabarbearia";
     private static final String SENHA = "Projetofinal123";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+
     
     public static Connection conectar() throws SQLException{
         try {
