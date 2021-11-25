@@ -66,7 +66,7 @@
 
         <div class="form-style-10">
             <h1>Cadastre-se <span>Cadastre-se e aproveite para conhecer nossos serviços!</span></h1>
-            <form action="gerenciarUsuario" method="POST" id="form">
+            <form action="gerenciarUsuario" method="POST" id="form" enctype="multipart/form-data">
                 <div class="section"><span>1</span>Nome:</div>
                 <div class="inner-wrap">
                     <label>Seu Nome: <input type="text" name="nome" required/></label>
@@ -91,6 +91,13 @@
                 <div class="inner-wrap">
                      <label>Data de Nascimento: <input type="date" name="dataNascimento"  required /></label>
                     <label>Endereço: <input type="text" name="endereco" maxlenght="45" minlenght="10" required/></label>
+                    
+                </div>
+                
+                <div class="section"><span>4</span>Foto:</div>
+                <div class="inner-wrap">
+                     <label>Foto de Exibição: <input type="file" name="file"  accept="image/*" /></label>
+                    
                      <span class="privacy-policy" style="color:black;">
                         <input type="checkbox" required >Você aceita os <a href="termos.jsp" style="color:blue;">termos</a> de uso do site. 
                     </span>

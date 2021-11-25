@@ -112,42 +112,81 @@ public class UsuarioDAO {
          
         
         if(usuario.getIdUsuario()==0){
-            String sql="INSERT INTO usuario(nome, login, senha, status, idPerfil,cpf,endereco,telefone,dataNascimento) VALUES (?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps=conexao.prepareStatement(sql);
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getLogin());
-            ps.setString(3,usuario.getSenha());
-            ps.setInt(4, usuario.getStatus());
-            ps.setInt(5, usuario.getPerfil().getIdPerfil());
-            ps.setString(6, usuario.getCpf());
-            ps.setString(7, usuario.getEndereco());
-            ps.setString(8, usuario.getTelefone());
-            ps.setDate(9, usuario.getDataNascimento());
+           
             
-            
-            ps.execute();
+            if(usuario.getFoto()!=null) {
+            	 String sql="INSERT INTO usuario(nome, login, senha, status, idPerfil,cpf,endereco,telefone,dataNascimento,imagem) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                 PreparedStatement ps=conexao.prepareStatement(sql);
+                 ps.setString(1, usuario.getNome());
+                 ps.setString(2, usuario.getLogin());
+                 ps.setString(3,usuario.getSenha());
+                 ps.setInt(4, usuario.getStatus());
+                 ps.setInt(5, usuario.getPerfil().getIdPerfil());
+                 ps.setString(6, usuario.getCpf());
+                 ps.setString(7, usuario.getEndereco());
+                 ps.setString(8, usuario.getTelefone());
+                 ps.setDate(9, usuario.getDataNascimento());	
+            	 ps.setBinaryStream(10, usuario.getFoto());
+       
+            	 ps.execute();
+           }else {
+        	   String sql="INSERT INTO usuario(nome, login, senha, status, idPerfil,cpf,endereco,telefone,dataNascimento) VALUES (?,?,?,?,?,?,?,?,?)";
+               PreparedStatement ps=conexao.prepareStatement(sql);
+               ps.setString(1, usuario.getNome());
+               ps.setString(2, usuario.getLogin());
+               ps.setString(3,usuario.getSenha());
+               ps.setInt(4, usuario.getStatus());
+               ps.setInt(5, usuario.getPerfil().getIdPerfil());
+               ps.setString(6, usuario.getCpf());
+               ps.setString(7, usuario.getEndereco());
+               ps.setString(8, usuario.getTelefone());
+               ps.setDate(9, usuario.getDataNascimento());
+               
+               
+               ps.execute();
+           }
             
             
         }if(usuario.getIdUsuario()>0){
-            String sql="UPDATE usuario SET nome = ?, senha = ?, " +
-                     "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ?,imagem=? WHERE idUsuario = ?";
-            PreparedStatement ps=conexao.prepareStatement(sql);
-            Blob imagem= null;
            
-    
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getSenha());   
-            ps.setInt(3, usuario.getStatus());
-            ps.setInt(4, usuario.getPerfil().getIdPerfil());
-            ps.setString(5,  usuario.getCpf());
-            ps.setString(6, usuario.getEndereco());
-            ps.setString(7, usuario.getTelefone());
-            ps.setDate(8, usuario.getDataNascimento());
-            ps.setBinaryStream(9, usuario.getFoto());
-            ps.setInt(10, usuario.getIdUsuario());
+            if(usuario.getFoto()!=null) {
+	            	String sql="UPDATE usuario SET nome = ?, senha = ?, " +
+	                        "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ?, imagem= ? WHERE idUsuario = ?";
+	               PreparedStatement ps=conexao.prepareStatement(sql);
+	           
+	               ps.setString(1, usuario.getNome());
+	               ps.setString(2, usuario.getSenha());   
+	               ps.setInt(3, usuario.getStatus());
+	               ps.setInt(4, usuario.getPerfil().getIdPerfil());
+	               ps.setString(5,  usuario.getCpf());
+	               ps.setString(6, usuario.getEndereco());
+	               ps.setString(7, usuario.getTelefone());
+	               ps.setDate(8, usuario.getDataNascimento());
+	               ps.setInt(9, usuario.getIdUsuario());
+	               ps.setBinaryStream(10, usuario.getFoto());
+	               
+	               ps.execute();	
+            	
+          
+            }else {
+	            	String sql="UPDATE usuario SET nome = ?, senha = ?, " +
+	                        "status = ?, idPerfil = ?, cpf=? ,endereco = ? ,telefone = ?,dataNascimento = ? WHERE idUsuario = ?";
+	               PreparedStatement ps=conexao.prepareStatement(sql);
+	           
+	               ps.setString(1, usuario.getNome());
+	               ps.setString(2, usuario.getSenha());   
+	               ps.setInt(3, usuario.getStatus());
+	               ps.setInt(4, usuario.getPerfil().getIdPerfil());
+	               ps.setString(5,  usuario.getCpf());
+	               ps.setString(6, usuario.getEndereco());
+	               ps.setString(7, usuario.getTelefone());
+	               ps.setDate(8, usuario.getDataNascimento());
+	               ps.setInt(9, usuario.getIdUsuario());
+	               
+	               
+	               ps.execute();
+            }
             
-            
-            ps.execute();
           
             
         }

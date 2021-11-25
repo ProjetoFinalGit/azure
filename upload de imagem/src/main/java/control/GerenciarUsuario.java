@@ -165,7 +165,8 @@ public class GerenciarUsuario extends HttpServlet {
           
             
             if(idUsuario.contentEquals("")){
-                
+            	 Part filePart = request.getPart("file");
+             	InputStream foto=  filePart.getInputStream();
                
                usuario.setNome(nome);
                     usuario.setLogin(login);
@@ -178,7 +179,9 @@ public class GerenciarUsuario extends HttpServlet {
                     usuario.setEndereco(endereco);
                     usuario.setTelefone(telefone);
                
-               
+                    if(filePart.getSize()>1) {
+                 	   usuario.setFoto(foto);
+                    }
                
                  if(udao.getVerificarUsuario(login, cpf)){  
                   
@@ -204,7 +207,11 @@ public class GerenciarUsuario extends HttpServlet {
                usuario.setLogin(login);
                usuario.setSenha(senha);
                usuario.setStatus(status);
-               usuario.setFoto(foto);
+               
+               if(filePart != null) {
+            	   usuario.setFoto(foto);
+               }
+               
                 usuario.setCpf(cpf);
                usuario.setDataNascimento(java.sql.Date.valueOf(data));
                usuario.setEndereco(endereco);
@@ -217,8 +224,16 @@ public class GerenciarUsuario extends HttpServlet {
       
             	   udao.gravar(usuario);
                    mensagem= "Usuário alterado com sucesso!"; 
-                   out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
-                   "location.href='listarUsuario.jsp';</script>"); 
+                   if(usuario.getPerfil().getIdPerfil()<4) {
+                	   out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                               "location.href='listarUsuario.jsp';</script>"); 
+                           
+                   }else {
+                	   out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
+                               "location.href='index.jsp';</script>"); 
+                           
+                   }
+                  
                
               
               
