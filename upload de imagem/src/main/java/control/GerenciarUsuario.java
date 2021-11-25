@@ -179,7 +179,7 @@ public class GerenciarUsuario extends HttpServlet {
                     usuario.setEndereco(endereco);
                     usuario.setTelefone(telefone);
                
-                    if(filePart.getSize()>1) {
+                    if(filePart.getSize()>0) {
                  	   usuario.setFoto(foto);
                     }
                
@@ -208,7 +208,7 @@ public class GerenciarUsuario extends HttpServlet {
                usuario.setSenha(senha);
                usuario.setStatus(status);
                
-               if(filePart != null) {
+               if(filePart.getSize() >0) {
             	   usuario.setFoto(foto);
                }
                

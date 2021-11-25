@@ -162,8 +162,8 @@ public class UsuarioDAO {
 	               ps.setString(6, usuario.getEndereco());
 	               ps.setString(7, usuario.getTelefone());
 	               ps.setDate(8, usuario.getDataNascimento());
-	               ps.setInt(9, usuario.getIdUsuario());
-	               ps.setBinaryStream(10, usuario.getFoto());
+	               ps.setInt(10, usuario.getIdUsuario());
+	               ps.setBinaryStream(9, usuario.getFoto());
 	               
 	               ps.execute();	
             	
