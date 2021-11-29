@@ -1,0 +1,9 @@
+.center-justified {
+  text-align: justify;
+  margin-left: auto;
+  width: 30em;
+}
+.container{
+    margin-left: 50px;
+}
+
