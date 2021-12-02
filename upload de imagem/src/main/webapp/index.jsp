@@ -160,7 +160,7 @@
                             <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
                                 <div class="u-container-layout">
                                     <a href="https://www.instagram.com/leolimabarber_shop/" target="_blank"><img src="images/instagram.png" alt="" class="u-image u-image-circle u-preserve-proportions u-image-2" data-image-width="640" data-image-height="640" ></a>
-                                    <img src="images/1200px-WhatsApp.svg1.png" alt="" class="u-image u-image-circle u-image-3" data-image-width="1200" data-image-height="1204" data-href="https://api.whatsapp.com/send?phone=5561982792951&text=Ol%C3%A1%2C%20estou%20conhecendo%20a%20barbearia%20pelo%20site%20%3A)" data-target="_blank">
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone=5561982792951&text=Ol%C3%A1%2C%20estou%20conhecendo%20a%20barbearia%20pelo%20site%20%3A"><img src="images/1200px-WhatsApp.svg1.png" alt="" class="u-image u-image-circle u-image-3" data-image-width="1200" data-image-height="1204" data-href="https://api.whatsapp.com/send?phone=5561982792951&text=Ol%C3%A1%2C%20estou%20conhecendo%20a%20barbearia%20pelo%20site%20%3A" data-target="_blank"></a>
                                 </div>
                             </div>
                         </div>
@@ -204,14 +204,14 @@
                             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
                                 <img alt="" class="u-expanded-width u-image u-image-default u-image-2" src="images/barbeiro.jpeg" data-image-width="768" data-image-height="1024">
                                 <h5 class="u-align-left u-text u-text-palette-2-base u-text-5">barbeiro</h5>
-                                <h4 class="u-align-left u-text u-text-6">borges</h4>
+                                <h4 class="u-align-left u-text u-text-6">Marcio</h4>
                             </div>
                         </div>
                         <div class="u-align-center u-container-style u-list-item u-repeater-item u-white u-list-item-3">
                             <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
                                 <img alt="" class="u-expanded-width u-image u-image-default u-image-3" src="images/aluno.jpeg" data-image-width="768" data-image-height="1024">
                                 <h5 class="u-align-left u-text u-text-palette-2-base u-text-7">Aluno</h5>
-                                <h4 class="u-align-left u-text u-text-8">renatinho</h4>
+                                <h4 class="u-align-left u-text u-text-8">Gabriel</h4>
                             </div>
                         </div>
                     </div>
