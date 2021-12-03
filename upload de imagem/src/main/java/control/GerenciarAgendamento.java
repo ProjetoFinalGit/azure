@@ -20,6 +20,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 import model.Agendamento;
 import model.AgendamentoDAO;
 import model.AgendamentoServico;
@@ -37,7 +39,13 @@ public class GerenciarAgendamento extends HttpServlet {
 
 
     
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -59,7 +67,7 @@ public class GerenciarAgendamento extends HttpServlet {
                      out.println("<script type='text/javascript'> "+"alert('"+mensagem+"');"+
                        "location.href='listarAgendamento.jsp';</script>");
                 }
-                if(acao.contains("cancelar")){
+                else if(acao.contains("cancelar")){
                     adao.cancelar(idAgendamento, status);
                      mensagem="Agendamento Cancelado!";
                      if(usuario.getPerfil().getIdPerfil()<4){
@@ -197,5 +205,5 @@ public class GerenciarAgendamento extends HttpServlet {
    
 
    
-
+    
 }

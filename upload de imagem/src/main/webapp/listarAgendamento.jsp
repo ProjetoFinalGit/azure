@@ -28,7 +28,7 @@
               maximum-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="all"/>
         
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/fontawesome.css"/>
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
         <link rel="stylesheet" href="datatables/dataTables.bootstrap4.css"/>
         <link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
@@ -66,13 +66,18 @@
                 <jsp:include page="templates/menu.jsp"/>
            
             </div><!-- fim da div menu -->
+            <div class="col-sm-2 col-12" style="padding-bottom: 10px; display:inline; height:25px;">
+                        <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;float:left; margin:10px;" href="agendamento.jsp" 
+                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO AGENDAMENTO</a>
+                      
+                        <a class="btn btn-primary btn-lg" target="_blank" style="background-color:#fbceb5;color:black;border-color:#fbceb5;float:right; margin:10px;" href="gerenciarRelatorio?acao=relatorio" 
+                           role="button"><i class="fas fa-list" ></i>&nbspRELATÓRIO</a>
+                       </div>
             <div id="content" style="padding-top: 10px">
                 <div class="h-100 justify-content-center align-items-center">
                     <div clas="col-12">
-                       <div class="col-sm-2 col-12" style="padding-bottom: 10px">
-                        <a class="btn btn-primary btn-lg" style="background-color:#fbceb5;color:black;border-color:#fbceb5;" href="agendamento.jsp" 
-                           role="button"><i class="fas fa-user-plus"></i>&nbspNOVO AGENDAMENTO</a>
-                       </div><br><br>
+                       
+                       <br><br>
                       
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover table-striped 

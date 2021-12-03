@@ -88,7 +88,7 @@ public class GerenciarLogin extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+        
     }
     
     public static Usuario verificarAcesso(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -136,6 +136,7 @@ public class GerenciarLogin extends HttpServlet {
         } catch (Exception e) {
             out.println("Falha: " + e.getMessage());
         }
+
         return usuario;
         
        
